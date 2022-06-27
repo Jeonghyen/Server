@@ -1,0 +1,376 @@
+
+
+JSP
+- 서블릿의 다음 버전
+
+서블릿
+1. 장점 > 자바 기반. 자바 구문 사용 가능 > 웹 페이지 만드는데 사용
+2. 단점 > 클라이언트 코드 작성 불편 + 가상 주소 매핑 불편
+
+
+JSP
+1. 장점 > HTML 기반 > 클라이언ㅌ 코드 작성 용이 + 가상 주소 매핑 불필요(web.xml))
+	> 브라우저가 JSP직접 호출 가능(HTML문서 기반)
+2. 단점 > 자바 구문 작성 불편
+
+
+JSP 요소
+1. JSP 지시자, JSP Directive
+	- Page 지시자
+	- include 지시자
+	- taglib 지시자
+	
+2. 스크립트 요소, Scripting Elements
+	- 스크립틀릿
+	- 익스프레션
+	- 선언부
+	
+3. 액션 태그, Action Tags
+	- 기본 액션 태그
+	- 확장 액션 태그
+	- 사용자 정의 태그
+
+	
+	
+	스크립틀릿, Scriptlet
+	- <% %> 이 영역을 스크립틀릿이라고 한다.
+	- Script + Applet
+	- HTML영역에서 Java를 사용가능한 영역 제공
+	- 사용빈도 높음
+	- 데이터(JDBC), 동적(HTML, CSS, JavaScript) 조작
+	
+	표현식, Expression
+	- <%= 값%>
+	- 값: 상수, 벼수, 메소드 반환값 등..
+	- 해당 위치에 자바 값을 출력하는 용도
+	
+	선언부, Declaration
+	- <%! %>
+	- 해당 JSP페이지에서 사용할 클래스 멤버변수와 메소드를 선언하는 영역
+	- JSP선언부에서 선언된 메소드의 최대 영역은 해당 JSP페이지 > 사용제한
+	- 대신 일반 자바 클래스를 만들어서 참조하는 방법을 더 많이 사용
+		
+	
+	
+	JSP 내장 객체, JSP Implicit Object
+	- JSP(톰캣)가 미리 만들어서 제공하는 객체
+	- 예약어로 제공
+	- request, response, session, pageContext > 자주 사용
+		- 객체 내부에 사용자 데이터를 저장할 수 있는 컬렉션을 가지고 있다 ***
+		- void setAttribute(String key, value)
+		- Object getAttribute(String key)
+		
+	- out, application
+	- config, page, exception
+	
+	request
+	- HTTPServletRequest
+	1. 클라이언트에서 서버로 전송한 데이터 가져오기
+		- ex09_form.jsp : 사용자 입력 데이터 + 서버로 전송
+		- ex09_ok.jsp : 데이터 수신
+
+	2. 클라이언트에서 서버로 전송한 데이터 인코딩 처리
+	1. 클라이언트에서 서버로 전송할 때의 관련 정보 가져오기
+	
+	
+	response
+	- HttpServletResponse
+	1. 돌려줄 HTML 제작
+		- 서블릿 > 명시적
+		- JSP > 명시적
+		
+	2. 돌려줄 페이지의 인코딩 설정
+		- request.setCharacterEncoding("UTF-8");
+		- 서블릿 > 명시적
+		- JSP > 명시적 > <%@ pageEncoding="UTF-8"%>
+		
+	3. 돌려줄 페이지의 MIME 설정
+		- 파일 업로드 수업
+		
+	4. 페이지 이동하기
+		- ex13_response_1.jsp
+		- ex13_response_2.jsp
+		
+		
+pageContext
+- 페이지 실행에 필요한 컨텍스트 정보를 저장하거나, 다른 내장 객체 접근, 페이지를 이동하는 역할
+	- ex14_pageContext_1.jsp
+	- ex14_pageContext_2.jsp
+	
+	
+	
+out 
+- 응답 페이지 작성을 위한 출력 스트림 객체
+- 서블릿의 PrintWritter와 동일한 역할
+
+session, application
+- 세션 변수 + 애플리케이션 변수 = 전역 변수(사이트 내의 모든 페이지에서 접근 가능)
+
+application
+- 전체 사이트를 관리
+- 애플리케이션 정보를 저장한 객체
+- 서버와 관련된 정보 제공
+	
+session
+- 개인 사용자를 관리
+- 클라이어트의 세션 정보를 저장한 객체
+- 클라이언트가 서버에 접속하는 순간부터 나가는 순간까지의 시간적 흐름
+- 클라이언트가 접속한 상태의 과정
+- 방문한 사용자 정보를 관리하는 객체
+
+
+파일 업로드
+- 업로드: 클라이언트측 자원 > 서버 전송 (= 파일 복사)
+- 다운로드 : 서버측 자원 > 클라이언트 전송(=파일 복사)
+- 브라우저와 웹서버간의 파일 복사
+
+파일 업로드 라이브러리
+- cos library > cos.jar
+- http://www.servlets.com > COS File Upload Library
+- webapp > WEB-INF > lib
+
+파일 업로드
+- ex18_file_form.jsp
+- ex18_file_ok.jsp
+
+
+내장 객체 > 저장소 제공 > pageContext > request, session, application 생명주기
+사용자 데이터 저장 > 4개의 객체 중 어떤 객체를 사용할 지?
+- ex21_scope_1.jsp
+- ex21_scope_2.jsp
+- ex21_scope_3.jsp
+
+
+
+EL 언어(Expresison Language)
+- <%= %> 기능을 대신하기 위해서 만들어진 언어
+- 자바의 값을 HTML 페이지 소스에 출력하는 역할
+- ${속성명}
+- 일반적인 자바 데이터 출력 불가능 (변수, 상수, 메소드 반환값)
+- JSP 객체 내 저장소의 값만 출력 가능
+
+
+액션 태그 , Action Tags
+- <jsp:XXX> <c:XXX>..
+- 기본 액션 태그
+- 확장 액션 태그
+- 
+
+JSTL 액션 태그
+- JSP Standard Tag Library
+- <c:XXX> 태그 사용
+- c > Namespace > 자바 패키지 역할
+- 설치 필요 > http://tomcat.apache.org/taglibs/standard/
+
+
+주소록
+- JSP Model 1
+- Oracle 11g
+- Bootstrap + jQuery
+- Apache Tomcat 8.5
+- Java 11
+
+기능
+- CRUD 구현
+- 주소록 쓰기
+- 주소록 보기
+- 주소록 수정하기
+- 주소록 삭제하기
+
+
+DB
+- tblAddress
+- 번호(PK)이름, 나이, 주소, 성별, 연락처
+
+디렉토리 구성 + 페이지 설계
+- 주소록 : webapp > address 폴더(루트폴더)
+- 주소록 쓰기 : webapp > address > add.jsp, addok.jsp
+- 주소록 읽기 : webapp > address > list.jsp(시작 페이지)
+- 주소록 수정 : webapp > address > edit.jsp, editok.jsp
+- 주소록 삭제 : webapp > address > del.jsp, delok.jsp
+- 템플릿 : webapp > address > template.jsp
+- 조각 페이지 : webapp > address > inc > header.jsp(머릿말 조각페이지)
+- 조각 페이지 : webapp > address > inc > asset.jsp(Bootstrap, jQuery)
+- 라이브러리 : webapp > address > css > addrss.css(전역 CSS)
+- 라이브러리 : webapp > address > js > addrss.css(전역 JavaScript)
+
+
+화면 툴 생성하기 > template.jsp
+
+
+
+
+이미지 갤러리
+
+1. list.jsp
+	- 목록
+	- DB > select > 사진 아이템 생성
+	- 사진 아이템 클릭 > 제목, 파일명, 날짜, 사진
+2. add.jsp + addok.jsp
+	- 제목, 이미지 > 서버 전송 //add
+	- 파일 업로드 처리 + 제목, 이미지명 > DB insert //addok
+3. delok.jsp
+	- 1. 파일 삭제
+	- 2. DB > delete
+
+
+DB
+- JSPTest > gallery.sql
+
+
+웹 인증, Authentication
+- 로그인, 로그 아웃
+- 현재 접속자가 해당 사이트의 구성원이지를 확인하는 작업
+- 해당 접속자가 구성원인지 확인 작업(아이디, 암호) > 인증 티켓 발급(인증 과정을 거쳐야지만 가지게 되는 정보) > 사이트 내에서 정보 전달 과정없이 정보 유지 + 보안성(타인 열람 불가능)
+- 세션 or 쿠키
+
+
+허가, Authorization
+- 특정 행위를 할 때 권한이 있는지 확인
+
+
+
+Servlet + JSP  > 협력
+분업
+- Servlet > Java
+- JSP > HTML
+
+JSP Model1의 처리 방식
+1. 상단에서 자바 작업 > Servlet
+2. 하단에서 자바의 결과물을 가지고 화면에 출력작업(HTML,CSS, JS) > JSP
+
+JSP Model2의 처리 방식
+- 고객 요청 > Servlet > (업무 위임 + 데이터 전달) > JSP > 페이지 완성
+
+
+
+JSP Model 1 > JSP Model 2
+
+JSP Model 1
+- JSP 페이지만을 사용
+- HTML, CSS, JavaScript > JSP페이지 작성
+- Java > JSP 페이지 작성
+
+JSP Model 2 > 현재 활발히 사용중
+- Servlet + JSP
+- 디자인 패턴 > MVC 기반
+	- Model + View + Controller
+	- Model > Data 계층 > DTO(DAO)
+	- View > 출력 계층 > JSP(뷰 페이지)
+	- Controller > 제어 계층 > Servlet
+
+
+- com.test.mvc
+	- Hello.java 서블릿
+- webapp > mvc폴더
+	- Hello.jsp
+	
+	
+	
+주소록, 갤러리, 할일
+
+메모장
+- JSP Model2(MVC)
+- Oracle 11g
+- Bootstrap, jQuery
+
+기능
+1. 메모 쓰기
+2. 메모 읽기(목록)
+3. 메모 수정
+4. 메모 삭제
+
+-com.test.memo
+	- DBUtil.java > 복사
+	- List.java > 메모 읽기
+	- Add.java , AddOk.java
+	- Edit.java, EditOk.java
+	- Del.java, DelOk.java
+	- DAO, DTO 생성
+	
+- webapp > WEB-INF > "views" > "memo" > "list.jsp" > 메모 읽기
+									- add.jsp , addok.jsp
+									- edit.jsp, editok.jsp
+									- del.jsp, delok.jsp
+
+- webapp > WEB-INF > "views" > "inc" 
+									- header.jsp > 조각 페이지
+									- asset.jsp > 조각 페이지
+								
+- webapp > "asset"
+			- css,js, fonts 복사
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+	
+	
+	
+	
+	
+	
+
+
