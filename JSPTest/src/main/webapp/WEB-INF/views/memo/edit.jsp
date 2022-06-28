@@ -37,7 +37,7 @@
 			</table>
 			
 			<div class="btns">
-				<input type="button" value="돌아가기" class="btn btn-secondary" onclick="location.href='jsp/memo/list.do';"/>
+				<input type="button" value="돌아가기" class="btn btn-secondary" onclick="location.href='/jsp/memo/list.do';"/>
 				<input type="submit" value="메모쓰기" class="btn btn-primary" />
 			</div>
 			

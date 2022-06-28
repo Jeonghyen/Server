@@ -1,6 +1,7 @@
-package com.test.memo;
+package com.test.playlist;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,24 +10,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/memo/del.do")
-public class Del extends HttpServlet {
+//@WebServlet("/playlist/list.do")
+@WebServlet("/playlist/list.do")
+public class List extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		//Del.java
-		//1. 데이터 가져오기(del.do?seq=?)
-		//2. JSP 호출 + 전달
 		
-		String seq = req.getParameter("seq");
+		//리스트 출력
 		
-		req.setAttribute("seq", seq);
+		//값 받아오기
+		
+		DAO dao = new DAO();
 		
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/memo/del.jsp");
+			
+		ArrayList<DTO> list = dao.list();
+		
+		req.setAttribute("list", list);
+		
+		
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/playlist/list.jsp");
 
 		dispatcher.forward(req, resp);
 
 	}
 }
-

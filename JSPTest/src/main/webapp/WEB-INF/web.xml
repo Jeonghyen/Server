@@ -23,6 +23,27 @@
   	<url-pattern>/hello.do</url-pattern>
   </servlet-mapping>
   
+ <servlet>
+  	<servlet-name>play</servlet-name>
+  	<servlet-class>com.test.playlist.List</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>play</servlet-name>
+  	<url-pattern>/list.do</url-pattern>
+  </servlet-mapping>
+  
+  
+ <!-- <servlet>
+  	<servlet-name>add</servlet-name>
+  	<servlet-class>com.test.playlist.AddPlOk</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>add</servlet-name>
+  	<url-pattern>/playlist/addokpl.do</url-pattern>
+  </servlet-mapping>
+   -->
 <!--   
 <servlet>
   	<servlet-name>template</servlet-name>

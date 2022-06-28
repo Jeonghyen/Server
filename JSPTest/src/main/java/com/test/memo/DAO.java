@@ -172,5 +172,27 @@ public class DAO {
 		}
 		return false;
 	}
+	
+	//DelOk에서 seq 전달 > 삭제
+	public int del(String seq) {
+		
+		try {
+				
+				String sql = "delete from tblMemo where seq=?";
+				
+				pstat = conn.prepareStatement(sql);
+				
+				pstat.setString(1, seq);
+				
+				return pstat.executeUpdate();
+				
+			} catch (Exception e) {
+				System.out.println("DAO.del");
+				e.printStackTrace();
+			}
+		
+		
+		return 0;
+	}
 
 }

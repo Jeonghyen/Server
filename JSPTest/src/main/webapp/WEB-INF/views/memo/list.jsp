@@ -39,7 +39,7 @@
 			
 			<div class="btns">
 				<input type="button" value="수정" class="btn btn-primary" onclick="location.href='/jsp/memo/edit.do?seq=${dto.seq}';"/>
-				<input type="button" value="삭제" class="btn btn-primary" onclick="location.href='/jsp/memo/del.do?seq=${dto.seq}';'"/>
+				<input type="button" value="삭제" class="btn btn-primary" onclick="location.href='/jsp/memo/del.do?seq=${dto.seq}';"/>
 			</div>
 			</c:forEach>
 			

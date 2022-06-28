@@ -46,6 +46,7 @@ public class DTO {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+
 	
 	//lombok
 	
